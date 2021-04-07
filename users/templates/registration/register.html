@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "candidates\base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% block content %}
+    <form action="{% url 'users:register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="hidden" name="next" value="{% url 'candidates:index' %}"/>
+         <button name="submit">Register</button>
+    </form>
+
+{% endblock content %}
+
+</body>
+</html>
