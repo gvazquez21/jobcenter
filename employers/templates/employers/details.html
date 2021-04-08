@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends "candidates/base.html" %}{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vacancy Details</title>
+</head>
+<body>
+        <!--    http// hardkodierte link ist abgeraten, deswegen wird employers:register-vacancy  verwendet -->
+    <p class="lead text-center">
+      <a
+        class="btn btn-primary btn-lg"
+        href="{% url 'employers:register-vacancy' %}"
+        role="button"
+        >Register a Vacancy</a
+      >
+    </p>
+{% endblock content %}
+</body>
+</html>

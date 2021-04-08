@@ -1,0 +1,9 @@
+{% extends "candidates/base.html" %}{% block content %}
+<p> Add new vacancy</p>
+<form action="{% url 'employers:register-vacancy' %}" method='post'>
+    {% csrf_token%}
+    {{form.as_p}}
+    <button name="submit">Post Vacancy</button>
+</form>
+
+{% endblock content %}

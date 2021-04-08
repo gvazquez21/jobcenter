@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Profile
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -11,11 +12,21 @@ def index(request):
 def profiles(request):
 
     profile = Profile.objects.filter(user=request.user).order_by('user')
-    context = {'profiles': profile}
+    currentuser=request.user
+    contains_profile = Profile.objects.filter(user=currentuser).first()
+    #print(type(Profile.objects))
+    #modelmanager,
+
+    context = {'profiles': profile, 'x': 100, 'contains_profile': contains_profile}
     return render(request, 'candidates/profile.html', context)
 
 @login_required
 def new_profile(request):
+    #muss prüfe ob ein Profil existiert mit diesem  User:
+    # wenn es existiert wieder in der Übersicht mit redirect
+    #print("REQUEST", request.user)
+    #print("first object :", Profile.objects.filter(user=theuser).first())
+    currentuser = request.user
 
     if request.method != 'POST':
         form = ProfileForm()
@@ -27,8 +38,15 @@ def new_profile(request):
             #new_profile.save()
             form.save()
             return redirect('candidates:profiles')
-    context = {'form': form}
-    return render(request, 'candidates/new_profile.html',context)
+
+    contains_profile = Profile.objects.filter(user=currentuser).first()
+    context = {'form': form, 'contains_profile': contains_profile}
+
+
+    if contains_profile != None:
+        return redirect('candidates:profiles')
+    else:
+        return render(request, 'candidates/new_profile.html',context)
 
 def edit_profile(request):
     theuser = request.user

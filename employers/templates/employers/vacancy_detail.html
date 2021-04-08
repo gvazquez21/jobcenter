@@ -1,0 +1,15 @@
+ {% extends "candidates/base.html" %}{% block content %}
+
+ {% if request.user == vacancy.employer %}
+          <p>{{vacancy.vacancy_title}}  </p>
+          <p> {{vacancy.type_employment}} </p>
+          <p> {{vacancy.organisation}}  </p>
+          <p> {{vacancy.location_vacancy}}</p>
+ <a href ="{% url 'employers:edit-vacancy' vacancy.slug %}"> Edit Vacancy</a>
+
+  {% else %}
+          <p>You do not have access to this page!</p>
+
+  {% endif %}
+
+{% endblock content %}

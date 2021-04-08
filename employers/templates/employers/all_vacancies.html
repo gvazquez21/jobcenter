@@ -1,0 +1,18 @@
+{% extends "candidates/base.html" %}{% block content %}
+
+  {% if not vacancies %}
+    Please <a href="{% url 'employers:register-vacancy' %}">add a vacancy</a> !
+  {% else %}
+    {% for vacancy in vacancies %}
+      <p> ------------------------------------------------------------</p>
+      <p>{{vacancy.vacancy_title}} </p>
+      <p> {{vacancy.type_employment}}</p>
+      <p> {{vacancy.organisation}}</p>
+      <p> {{vacancy.location_vacancy}}</p>
+      <p> {{vacancy.basic_info_vacancy}}</p>
+      <p>Posted on {{vacancy.date_posted|date:"F d, Y"}}</p>
+      <p> {{vacancy.slug}} </p>
+      <a href ="{% url 'employers:edit-vacancy' vacancy.slug %}"> Edit Vacancy</a>
+    {% endfor %}
+  {% endif %}
+{% endblock content %}

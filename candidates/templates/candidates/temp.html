@@ -1,5 +1,11 @@
-{% extends "candidates/base.html" %}
+{% extends "candidates/base.html" %}{% load bootstrap4 %}
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Suche</title>
+</head>
+<body>
 
 <!--
 {{contains_profile}}
@@ -17,23 +23,31 @@
   <li> {{ profile.user}} </li>
 
   <form class="form-signin">
-
+    <div class="form-group">
       <p>Name: {{ profile.full_name }}</p>
       <p>Country: {{ profile.country.name }}</p>
       <p>Location: {{ profile.location }}</p>
       {% if profile.resume %}
       <p>
         Resume:
-        <a href="{{ profile.resume.url }}">Click to Download</a>
+        <a href="{{ profile.resume.url }}">Click to View/Download</a>
       </p>
       {% else %}
       <p>Resume: Not Provided</p>
       {% endif %} {% if request.user == u %}
       <hr class="my-4" />
-      <a href="{% url 'edit-profile' %}">Edit Profile</a><br />
+      <a
+        class="btn btn-warning btn-block"
+        href="{% url 'edit-profile' %}"
+        >Edit Profile</a><br />
 
+      <a class="btn btn-primary btn-block" href="{% url 'saved-jobs' %}"
+        >Saved Jobs</a><br />
+      <a
+        class="btn btn-success btn-block"
+        href="{% url 'applied-jobs' %}">Applied Jobs</a>
       {% endif %}
-
+    </div>
   </form>
     {% empty %}
   <li> No profiles habe benn added yet</li>
@@ -41,4 +55,9 @@
   </ui>
 
 {% endblock content %}
+
+
+</body>
+</html>
+
 

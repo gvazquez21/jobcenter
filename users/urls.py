@@ -9,4 +9,7 @@ urlpatterns = [
     #Registrierungsseite.
     path('register/', views.register, name='register'),
 
+    #logoutseite
+
+
 ]
